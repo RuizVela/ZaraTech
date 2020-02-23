@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZaraTech Prueba", "ZaraTech Prueba\ZaraTech Prueba.csproj", "{B63C30F2-BC16-4527-B397-60F48215B0FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B63C30F2-BC16-4527-B397-60F48215B0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63C30F2-BC16-4527-B397-60F48215B0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63C30F2-BC16-4527-B397-60F48215B0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63C30F2-BC16-4527-B397-60F48215B0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A3A81E3-E94A-47D4-AE4A-231D0951D897}
+	EndGlobalSection
+EndGlobal
