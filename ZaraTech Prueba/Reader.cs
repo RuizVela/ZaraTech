@@ -25,5 +25,11 @@ namespace ZaraTech_Prueba
                 closures.Add(columns[2]);
             }
         }
+        public DateTime GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
+        {
+            DateTime lastMonthDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            int difference = lastMonthDay.DayOfWeek - day;
+            return difference > 0 ? lastMonthDay.AddDays(-1 * difference) : lastMonthDay.AddDays(-1 * (7 + difference));
+        }
     }
 }
