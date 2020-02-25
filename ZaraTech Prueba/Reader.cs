@@ -11,11 +11,11 @@ namespace ZaraTech_Prueba
     public class Reader
     {
             decimal totalShares;
-            public List<string> dates = new List<string>();
+            public List<DateTime> dates = new List<DateTime>();
             List<string> openings = new List<string>();
             List<string> closures = new List<string>();
             const string path = @"c:\Users\usuario\source\repos\ZaraTech Prueba\stocks-ITX.csv";
-            CultureInfo provider = new CultureInfo("es-ES");
+            CultureInfo provider = new CultureInfo("es-US");
 
         public void Read()
         {
@@ -23,36 +23,46 @@ namespace ZaraTech_Prueba
             foreach (string line in lines)
             {
                 string[] columns = line.Split(';');
-                dates.Add(columns[0]);
+                if (columns[0] != "Fecha")
+                {
+                dates.Add(Convert.ToDateTime(columns[0], provider));
+                }
+                if (columns[1] != "Cierre")
+                {
                 closures.Add(columns[1]);
+                }
+                if (columns[2] != "Apertura")
+                { 
                 openings.Add(columns[2]);
+                }
             }
         }
-        public string GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
+        private DateTime GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
         {
             var monthDays = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            var lastDay = monthDays;
-            while (monthDays.DayOfWeek != day)
+            monthDays = Convert.ToDateTime(monthDays, provider);
+            while ((monthDays.DayOfWeek != day) )
             {
-                lastDay = monthDays.AddDays(-1);
+                monthDays = monthDays.AddDays(-1);
             }
-
-            var lastWeekDay = lastDay.ToString("dd-MMM-yyyy", provider);
-            lastWeekDay = lastWeekDay.Replace(".", "");
-            return lastWeekDay;
+            while (!dates.Contains(monthDays))
+            {
+                monthDays = monthDays.AddDays(-1);
+            }
+            return monthDays;
         }
         public decimal BuyShares(int year, int month, DayOfWeek day)
         {
             var buyingDay = GetLastWeekDayOfMonth(year, month, day);
-                var position = dates.IndexOf(buyingDay)-1;
+            var position = dates.IndexOf(buyingDay) - 1;
                 decimal shares = BuyPartialShare(position);
-                totalShares = shares;
+                totalShares = totalShares + shares;
             return totalShares;
         }
         private decimal BuyPartialShare(int position)
         {
-            int inversion = 49;
-            string openingValue = openings[position].Replace(".", ",");
+            var inversion = 49;
+            var openingValue = openings[position].Replace(".", ",");
             decimal divisor = decimal.Parse(openingValue);
             divisor = Math.Round(divisor, 3);
             decimal shares = inversion / divisor;

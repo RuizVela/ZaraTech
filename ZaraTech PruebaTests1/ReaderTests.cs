@@ -14,10 +14,12 @@ namespace ZaraTech_Prueba.Tests
         [TestMethod()]
         public void GetLastWeekDayOfMonthTest()
         {
-            Reader reader = new Reader();
-            string thursday = reader.GetLastWeekDayOfMonth(2017, 11, DayOfWeek.Thursday);
-            string day = "30-nov-2017";
-            Assert.AreEqual(thursday, day);
+            var reader = new Reader();
+            reader.Read();
+            var privateReader = new PrivateObject(reader);
+            object thursday = privateReader.Invoke("GetLastWeekDayOfMonth",2014, 12, DayOfWeek.Thursday);
+            DateTime day = new DateTime(2014, 12, 24);
+            Assert.AreEqual(day, thursday);
         }
 
         [TestMethod()]
@@ -27,7 +29,17 @@ namespace ZaraTech_Prueba.Tests
             reader.Read();
             var totalShares = reader.BuyShares(2017, 11, DayOfWeek.Thursday);
             decimal expected = 1.648m;
-            Assert.AreEqual(totalShares, expected);
+            Assert.AreEqual(expected, totalShares);
+        }
+
+        [TestMethod()]
+        public void BuySharesTest1()
+        {
+            Reader reader = new Reader();
+            reader.Read();
+            var totalShares = reader.BuyShares(2014, 12, DayOfWeek.Thursday);
+            decimal expected = 2.057m;
+            Assert.AreEqual(expected, totalShares);
         }
     }
 }
