@@ -4,32 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace ZaraTech_Prueba
 {
     public class Reader
     {
-            List<string> dates = new List<string>();
+            decimal totalShares;
+            public List<string> dates = new List<string>();
             List<string> openings = new List<string>();
             List<string> closures = new List<string>();
-        void Read()
+            const string path = @"c:\Users\usuario\source\repos\ZaraTech Prueba\stocks-ITX.csv";
+            CultureInfo provider = new CultureInfo("es-ES");
+
+        public void Read()
         {
-            string path = @"c:\Users\usuario\source\repos\ZaraTech Prueba\stocks-ITX.csv";
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {
-
                 string[] columns = line.Split(';');
                 dates.Add(columns[0]);
-                openings.Add(columns[1]);
-                closures.Add(columns[2]);
+                closures.Add(columns[1]);
+                openings.Add(columns[2]);
             }
         }
-        public DateTime GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
+        public string GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
         {
-            DateTime lastMonthDay = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            int difference = lastMonthDay.DayOfWeek - day;
-            return difference > 0 ? lastMonthDay.AddDays(-1 * difference) : lastMonthDay.AddDays(-1 * (7 + difference));
+            var monthDays = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            var lastDay = monthDays;
+            while (monthDays.DayOfWeek != day)
+            {
+                lastDay = monthDays.AddDays(-1);
+            }
+
+            var lastWeekDay = lastDay.ToString("dd-MMM-yyyy", provider);
+            lastWeekDay = lastWeekDay.Replace(".", "");
+            return lastWeekDay;
         }
     }
 }

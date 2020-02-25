@@ -15,8 +15,8 @@ namespace ZaraTech_Prueba.Tests
         public void GetLastWeekDayOfMonthTest()
         {
             Reader reader = new Reader();
-            DateTime thursday = reader.GetLastWeekDayOfMonth(2017, 12, DayOfWeek.Thursday);
-            DateTime day = new DateTime(2017, 12, 28);
+            string thursday = reader.GetLastWeekDayOfMonth(2017, 11, DayOfWeek.Thursday);
+            string day = "30-nov-2017";
             Assert.IsTrue(thursday == day);
         }
     }
