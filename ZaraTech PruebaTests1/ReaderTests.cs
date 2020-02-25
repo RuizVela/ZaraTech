@@ -17,7 +17,17 @@ namespace ZaraTech_Prueba.Tests
             Reader reader = new Reader();
             string thursday = reader.GetLastWeekDayOfMonth(2017, 11, DayOfWeek.Thursday);
             string day = "30-nov-2017";
-            Assert.IsTrue(thursday == day);
+            Assert.AreEqual(thursday, day);
+        }
+
+        [TestMethod()]
+        public void BuySharesTest()
+        {
+            Reader reader = new Reader();
+            reader.Read();
+            var totalShares = reader.BuyShares(2017, 11, DayOfWeek.Thursday);
+            decimal expected = 1.648m;
+            Assert.AreEqual(totalShares, expected);
         }
     }
 }

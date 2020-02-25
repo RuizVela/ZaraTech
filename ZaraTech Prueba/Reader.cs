@@ -41,5 +41,23 @@ namespace ZaraTech_Prueba
             lastWeekDay = lastWeekDay.Replace(".", "");
             return lastWeekDay;
         }
+        public decimal BuyShares(int year, int month, DayOfWeek day)
+        {
+            var buyingDay = GetLastWeekDayOfMonth(year, month, day);
+                var position = dates.IndexOf(buyingDay)-1;
+                decimal shares = BuyPartialShare(position);
+                totalShares = shares;
+            return totalShares;
+        }
+        private decimal BuyPartialShare(int position)
+        {
+            int inversion = 49;
+            string openingValue = openings[position].Replace(".", ",");
+            decimal divisor = decimal.Parse(openingValue);
+            divisor = Math.Round(divisor, 3);
+            decimal shares = inversion / divisor;
+            shares = Math.Round(shares, 3);
+            return shares;
+        }
     }
 }
