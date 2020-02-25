@@ -41,7 +41,7 @@ namespace ZaraTech_Prueba
         {
             var monthDays = new DateTime(year, month, DateTime.DaysInMonth(year, month));
             monthDays = Convert.ToDateTime(monthDays, provider);
-            while ((monthDays.DayOfWeek != day) )
+            while (monthDays.DayOfWeek != day)
             {
                 monthDays = monthDays.AddDays(-1);
             }
@@ -68,6 +68,21 @@ namespace ZaraTech_Prueba
             decimal shares = inversion / divisor;
             shares = Math.Round(shares, 3);
             return shares;
+        }
+        public decimal GetAllShares(DateTime initialDate, DateTime endDate, DayOfWeek day)
+        {
+            while(initialDate < endDate)
+            {
+                BuyShares(initialDate.Year, initialDate.Month, day);
+                initialDate = initialDate.AddMonths(+1);
+            }
+            return totalShares;
+        }
+        public decimal SellAllShares(DateTime initialDate, DateTime endDate, DayOfWeek day)
+        {
+            var totalShares = GetAllShares(initialDate, endDate, day);
+            decimal euros = Math.Round(29.17m * totalShares, 3);
+            return euros;
         }
     }
 }

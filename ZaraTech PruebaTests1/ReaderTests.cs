@@ -17,7 +17,7 @@ namespace ZaraTech_Prueba.Tests
             var reader = new Reader();
             reader.Read();
             var privateReader = new PrivateObject(reader);
-            object thursday = privateReader.Invoke("GetLastWeekDayOfMonth",2014, 12, DayOfWeek.Thursday);
+            object thursday = privateReader.Invoke("GetLastWeekDayOfMonth", 2014, 12, DayOfWeek.Thursday);
             DateTime day = new DateTime(2014, 12, 24);
             Assert.AreEqual(day, thursday);
         }
@@ -28,7 +28,7 @@ namespace ZaraTech_Prueba.Tests
             Reader reader = new Reader();
             reader.Read();
             var totalShares = reader.BuyShares(2017, 11, DayOfWeek.Thursday);
-            decimal expected = 1.648m;
+            var expected = 1.648m;
             Assert.AreEqual(expected, totalShares);
         }
 
@@ -38,7 +38,33 @@ namespace ZaraTech_Prueba.Tests
             Reader reader = new Reader();
             reader.Read();
             var totalShares = reader.BuyShares(2014, 12, DayOfWeek.Thursday);
-            decimal expected = 2.057m;
+            var expected = 2.057m;
+            Assert.AreEqual(expected, totalShares);
+        }
+
+        [TestMethod()]
+        public void GetAllSharesTest()
+        {
+            Reader reader = new Reader();
+            reader.Read();
+            var initialDate = new DateTime(2001, 05, 23);
+            var endDate = new DateTime(2017, 12, 23);
+            var day = DayOfWeek.Thursday;
+            var totalShares = reader.GetAllShares(initialDate, endDate, day);
+            var expected = 1254.219m;
+            Assert.AreEqual(expected, totalShares);
+        }
+
+        [TestMethod()]
+        public void SellAllSharesTest()
+        {
+            Reader reader = new Reader();
+            reader.Read();
+            var initialDate = new DateTime(2001, 05, 23);
+            var endDate = new DateTime(2017, 12, 23);
+            var day = DayOfWeek.Thursday;
+            var totalShares = reader.SellAllShares(initialDate, endDate, day);
+            var expected = 36585.568m;
             Assert.AreEqual(expected, totalShares);
         }
     }
