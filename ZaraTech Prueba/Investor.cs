@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using log4net;
 
 namespace ZaraTech_Prueba
 {
     public class Investor
     {
+        private static readonly ILog log = LogManager.GetLogger
+(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         decimal totalStocks;
 
         private DateTime GetLastWeekDayOfMonth(int year, int month, DayOfWeek day, Reader file)
@@ -34,7 +34,12 @@ namespace ZaraTech_Prueba
             }
             decimal stocks = BuyPartialStock(position, file);
             totalStocks += stocks;
+            log.Info("Fecha de compra: " + buyingDay);
+            log.Info("Acciones compradas: " +stocks);
+            log.Info("Acciones totales hasta la fecha: " + totalStocks);
+            //TODO: guardar dato en log.
         }
+
         private decimal BuyPartialStock(int position, Reader file)
         {
             List<decimal> openings = file.GetOpeningValues();
@@ -63,6 +68,7 @@ namespace ZaraTech_Prueba
             decimal sellingPrice = closures[file.GetDates().IndexOf(endDate)];
             var allStocks = GetAllStocks(initialDate, endDate, day, file);
             decimal euros = Math.Round(sellingPrice * allStocks, 3);
+            log.Info("Euros ganados por la venta de todas las acciones: " + euros);
             return euros;
         }
     }

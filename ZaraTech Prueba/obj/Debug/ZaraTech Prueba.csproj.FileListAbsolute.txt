@@ -5,3 +5,6 @@ C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.pdb
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.csprojAssemblyReference.cache
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\bin\Debug\stocks-ITX.csv
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\bin\Debug\log4net.dll
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\bin\Debug\log4net.xml
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.csproj.CopyComplete

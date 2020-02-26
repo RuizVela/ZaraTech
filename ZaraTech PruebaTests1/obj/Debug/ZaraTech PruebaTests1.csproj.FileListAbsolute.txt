@@ -18,3 +18,5 @@ C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\obj\Debug\Za
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\obj\Debug\ZaraTech PruebaTests1.dll
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\obj\Debug\ZaraTech PruebaTests1.pdb
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\bin\Debug\stocks-ITX.csv
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\bin\Debug\log4net.dll
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech PruebaTests1\bin\Debug\log4net.xml
