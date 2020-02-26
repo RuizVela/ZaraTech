@@ -4,3 +4,4 @@ C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\bin\Debug\ZaraTech
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.exe
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.pdb
 C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\obj\Debug\ZaraTech Prueba.csprojAssemblyReference.cache
+C:\Users\usuario\source\repos\ZaraTech Prueba\ZaraTech Prueba\bin\Debug\stocks-ITX.csv

@@ -1,88 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using System.Configuration;
 
 namespace ZaraTech_Prueba
 {
     public class Reader
     {
-            decimal totalShares;
-            public List<DateTime> dates = new List<DateTime>();
-            List<string> openings = new List<string>();
-            List<string> closures = new List<string>();
-            const string path = @"c:\Users\usuario\source\repos\ZaraTech Prueba\stocks-ITX.csv";
-            CultureInfo provider = new CultureInfo("es-US");
+        private readonly List<DateTime> dates = new List<DateTime>();
+        private readonly List<decimal> openings = new List<decimal>();
+        private readonly List<decimal> closures = new List<decimal>();
+        //readonly string path = ConfigurationManager.AppSettings["path"].ToString();
+        const string path = "stocks-ITX.csv";
+        readonly CultureInfo provider = new CultureInfo("es-US");
 
-        public void Read()
+        public void StoreData()
         {
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {
                 string[] columns = line.Split(';');
-                if (columns[0] != "Fecha")
-                {
-                dates.Add(Convert.ToDateTime(columns[0], provider));
-                }
-                if (columns[1] != "Cierre")
-                {
-                closures.Add(columns[1]);
-                }
-                if (columns[2] != "Apertura")
-                { 
-                openings.Add(columns[2]);
-                }
+                StoreDates(columns[0]);
+                StoreClosurePrices(columns[1]);
+                StoreOpeningPrices(columns[2]);
             }
         }
-        private DateTime GetLastWeekDayOfMonth(int year, int month, System.DayOfWeek day)
+        private void StoreDates(string date)
         {
-            var monthDays = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            monthDays = Convert.ToDateTime(monthDays, provider);
-            while (monthDays.DayOfWeek != day)
+            if (date == "Fecha")
             {
-                monthDays = monthDays.AddDays(-1);
+                return;
             }
-            while (!dates.Contains(monthDays))
+                dates.Add(Convert.ToDateTime(date, provider));
+        }
+        private void StoreClosurePrices(string price)
+        {
+            if (price == "Cierre")
             {
-                monthDays = monthDays.AddDays(-1);
+                return;
             }
-            return monthDays;
+                closures.Add(Math.Round(decimal.Parse(price.Replace(".",",")),3));
         }
-        public decimal BuyShares(int year, int month, DayOfWeek day)
+        private void StoreOpeningPrices(string price)
         {
-            var buyingDay = GetLastWeekDayOfMonth(year, month, day);
-            var position = dates.IndexOf(buyingDay) - 1;
-                decimal shares = BuyPartialShare(position);
-                totalShares = totalShares + shares;
-            return totalShares;
-        }
-        private decimal BuyPartialShare(int position)
-        {
-            var inversion = 49;
-            var openingValue = openings[position].Replace(".", ",");
-            decimal divisor = decimal.Parse(openingValue);
-            divisor = Math.Round(divisor, 3);
-            decimal shares = inversion / divisor;
-            shares = Math.Round(shares, 3);
-            return shares;
-        }
-        public decimal GetAllShares(DateTime initialDate, DateTime endDate, DayOfWeek day)
-        {
-            while(initialDate < endDate)
+            if (price == "Apertura")
             {
-                BuyShares(initialDate.Year, initialDate.Month, day);
-                initialDate = initialDate.AddMonths(+1);
+                return;
             }
-            return totalShares;
+                openings.Add(decimal.Parse(price.Replace(".", ",")));
         }
-        public decimal SellAllShares(DateTime initialDate, DateTime endDate, DayOfWeek day)
+        public List<DateTime> GetDates()
         {
-            var totalShares = GetAllShares(initialDate, endDate, day);
-            decimal euros = Math.Round(29.17m * totalShares, 3);
-            return euros;
+            return dates;
+        }
+        public List<Decimal> GetOpeningValues()
+        {
+            return openings;
+        }
+        public List<Decimal> GetClosureValues()
+        {
+            return closures;
+        }
+        public CultureInfo GetProvider()
+        {
+            return provider;
         }
     }
 }
