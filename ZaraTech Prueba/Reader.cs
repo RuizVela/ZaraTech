@@ -11,8 +11,7 @@ namespace ZaraTech_Prueba
         private readonly List<DateTime> dates = new List<DateTime>();
         private readonly List<decimal> openings = new List<decimal>();
         private readonly List<decimal> closures = new List<decimal>();
-        //readonly string path = ConfigurationManager.AppSettings["path"].ToString();
-        const string path = "stocks-ITX.csv";
+        readonly string path = ConfigurationManager.AppSettings["path"].ToString();
         readonly CultureInfo provider = new CultureInfo("es-US");
 
         public void StoreData()
