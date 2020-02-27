@@ -37,7 +37,6 @@ namespace ZaraTech_Prueba
             log.Info("Fecha de compra: " + buyingDay);
             log.Info("Acciones compradas: " +stocks);
             log.Info("Acciones totales hasta la fecha: " + totalStocks);
-            //TODO: guardar dato en log.
         }
 
         private decimal BuyPartialStock(int position, Reader file)
